@@ -6,7 +6,8 @@ const Note = new Schema(
   {
     content: { type: String, required: true },
     bug: { type: ObjectId, ref: "Bug", required: true },
-    reportedBy: { type: String, enum: ["pending", "completed", "rejected"] }
+    reportedBy: { type: String, required: true }, //The provided name for who made the note
+    flagged: { type: String, enum: ["pending", "completed", "rejected"] }
   },
   {
     timestamps: true,
