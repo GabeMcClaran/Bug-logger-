@@ -1,16 +1,18 @@
 <template>
-  <div id="app">
+  <div class="containter-fluid" id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <nav class="navbar navbar-light bg-info">
+        <span class="navbar-brand mb-0 h1 badge badge-light">Bug Tracker</span>
+        <button class="btn btn-dark">Report</button>
+      </nav>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

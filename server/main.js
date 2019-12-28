@@ -35,13 +35,13 @@ server.use(bp.json());
 //NOTE next we want to register all our routes(doorways that can be accessed in our app)
 
 //NOTE we have to import access to our controllers
-import ValuesController from "./controllers/ValuesController";
-import BugsController from "./controllers/BugsController";
-import NotesController from "./controllers/NotesController";
+import ValueController from "./controllers/ValuesController";
+import BugController from "./controllers/BugsController";
+import NoteController from "./controllers/NotesController";
 //NOTE remember the forward slash at the start of your path!
-server.use("/api/values", new ValuesController().router);
-server.use("/api/notes", new NotesController().router);
-server.use("/api/bugs", new BugsController().router);
+server.use("/api/values", new ValueController().router);
+server.use("/api/notes", new NoteController().router);
+server.use("/api/bugs", new BugController().router);
 
 //NOTE Everything below this line always stays the same
 
