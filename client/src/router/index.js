@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Bug from "../views/Bug.vue";
+import BugDetails from "../views/BugDetails.vue";
 
 Vue.use(VueRouter);
 
@@ -12,12 +12,12 @@ const routes = [
     component: Home
   },
   {
-    path: "/bugs/:id",
-    name: "bug",
+    path: "/bug/:id",
+    name: "bugdetails",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: Bug
+    component: BugDetails
   }
 ];
 

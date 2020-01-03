@@ -1,14 +1,15 @@
 <template>
   <div class="containter-fluid" id="app">
-    <div id="nav">
-      <nav class="navbar navbar-light bg-info">
-        <span class="navbar-brand mb-0 h1 badge badge-light">Bug Tracker</span>
-        <button class="btn btn-dark">Report</button>
-      </nav>
-    </div>
+    <router-link to="/">Home</router-link>
+    
+    
     <router-view />
   </div>
 </template>
+
+<script>
+
+</script>
 
 <style>
 #app {

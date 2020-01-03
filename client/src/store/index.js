@@ -19,8 +19,9 @@ export default new Vuex.Store({
     setAllBugs(state, data) {
       state.bugs = data;
     },
-    setActiveBug(state, data) {
-      state.activeBug = data;
+    setActiveBug(state, bug) {
+      state.activeBug = bug;
+      // console.log(bug);
     },
     addBug(state, data) {
       state.bugs.push(data);
@@ -30,16 +31,20 @@ export default new Vuex.Store({
     async getAllBugs({ commit, dispatch }) {
       // debugger;
       let res = await _sandbox.get("bugs");
-      commit("setAllBugs", res.data.data);
-      console.log(res);
+      commit("setAllBugs", res.data);
+      console.log(this.state.bugs);
     },
-    async getActiveBug({ commit, dispatch }, id) {
-      let res = await _sandbox.get("bugs/" + id);
-      commit("setActiveBug", res.data.data);
+    setActiveBug({ commit, dispatch }, bug) {
+      commit("setActiveBug", bug);
     },
     async createBug({ commit, dispatch }, bug) {
       let res = await _sandbox.post("bugs", bug);
-      commit("addBug", res.data.data);
+      commit("addBug", res.data);
+    },
+
+    async close({ commit, dispatch }, id) {
+      await _sandbox.delete("bugs/" + id);
+      dispatch("getAllBugs");
     }
   },
   modules: {}
