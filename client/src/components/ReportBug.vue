@@ -31,13 +31,14 @@
     },
 
     methods: {
-      makeBug() {
+      async makeBug() {
         let data = {
           reportedBy: this.reportedBy,
           title: this.title,
           description: this.description
         };
-        this.$store.dispatch("createBug", data);
+        let id = await this.$store.dispatch("createBug", data);
+        this.$router.push("/bug/" + id);
       }
     }
   };

@@ -1,6 +1,6 @@
 <template>
   <div class="BugDetails container">
-    BUG DETAILS view here
+    <h1>BUG DETAILS</h1>
     <div class="row">
       <div class="col-12">
         <h5>Title:</h5>
@@ -23,34 +23,64 @@
     </div>
     <div class="row">
       <div class="col">
+        <button @click="edit" class="btn btn-info">Edit</button>
         <button @click="close" class="btn btn-danger">CLOSE</button>
       </div>
     </div>
-    <h1>Notes:</h1>
-    <!-- <notes /> -->
+    <h3>Notes:</h3>
+    <report-note/>
+    <notes v-for="note in notes" :key="note.id" :note="note"/>
+    
   </div>
 </template>
 
 <script>
-  // import Notes from "../components/Notes";
+  import Notes from "@/components/Notes.vue";
+  import ReportNote from "@/components/ReportNote.vue";
   export default {
     name: "bugdetails",
-    // props: [bugData],
+    props: ["bugdata"],
     mounted() {
-      // this.$store.dispatch("getBugById", this.id);
-      // this.$store.dispatch("getNotes",this.id)
+      this.$store.dispatch("getBugById", this.$route.params.id);
+      this.$store.dispatch("getNotes", this.$route.params.id);
     },
     computed: {
       bug() {
         return this.$store.state.activeBug;
+      },
+      notes(){
+        return this.$store.state.notes;
       }
     },
     methods: {
       close() {
-        this.$store.dispatch("close", this.bug.id);
+        swal({
+          title: "Are you sure?",
+          text: "Once bug is closed you will not be able to edit Bug.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(willDelete => {
+          if (willDelete) {
+            this.$store.dispatch("close", this.bug.id);
+            swal("Bug has been closed!", {
+              icon: "success"
+            });
+          } else {
+            swal("Bug is still open.");
+          }
+        });
+
+      },
+      edit(){
+
       }
+      
     },
-    components: {}
+    components: {
+      Notes,
+      ReportNote
+    }
   };
 </script>
 

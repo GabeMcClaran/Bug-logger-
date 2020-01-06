@@ -14,7 +14,7 @@
         <H2>Current Bugs</H2>
       </div>
       <div class="col-6">
-        <p type="checkbox">Hide Closed</p>
+        <p><input type="checkbox" @click="filter()">Hide Closed</p>
       </div>
     </div>
     <div class="row">
@@ -24,16 +24,17 @@
             <tr>
               <th>Title</th>
               <th>Reported By</th>
-              <th>Status</th>
+              <th>Closed</th>
               <th>Last Modified</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="bug in bugs" :key="bug.id" @click="setActive(bug)">
+            <tr class="table" v-for="bug in bugs" :key="bug.id" @click="setActive(bug)">
               
-              <td v-model="newBug.title" type="text" id="title" required><router-link :to="{name: 'bugdetails', params:{ id: bug._id} }">
-                {{ bug.title }}</router-link>
+              <router-link :to="{name: 'bugdetails', params:{ id: bug.id} }"><td v-model="newBug.title" type="text" id="title" required>
+                {{ bug.title }}
               </td>
+            </router-link>
               <td
                 v-model="newBug.reportedBy"
                 type="text"
@@ -42,7 +43,7 @@
               >
                 {{ bug.reportedBy }}
               </td>
-              <td class="bugStatus" :class="{greyscale: bugdetails.close}" v-model="newBug.closed" type="Boolean" id="closed" required>
+              <td class="bugStatus" :class="{finished: bug.closed}" v-model="newBug.closed" type="Boolean" id="closed" required>
                 {{ bug.closed }}
               </td>
               <td v-model="newBug.closedDate" type="date" id="dateClosed">
@@ -91,13 +92,20 @@
         
       }
     },
-  };
+    filter(){
+      
+    }
+    
+    
+    }
+    
+
 </script>
 <style>
-  #closed {
+  .bugStatus {
    color: green;
   }
-  .greyscale{
+  .finished{
     color: red;
   }
 </style>

@@ -1,12 +1,15 @@
 import express from "express";
 import noteService from "../services/NoteService";
+import bugService from "../services/BugService";
+
 export default class NoteController {
   constructor() {
     this.router = express
       .Router()
       .post("", this.create)
       .put("/:id", this.edit)
-      .delete("/:id", this.delete);
+      .delete("/:id", this.delete)
+      .get("/:id/notes", this.getNotesByBugId);
   }
 
   // async getAll(req, res, next) {
@@ -25,6 +28,14 @@ export default class NoteController {
   //     next(error);
   //   }
   // }
+  async getNotesByBugId(req, res, next) {
+    try {
+      let data = await bugService.getNotesByBugId(req.params.id);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   async create(req, res, next) {
     try {
